@@ -9,5 +9,5 @@ interface IListener {
     void done(); 
 
     // the player chooses to roll the die twice
-    int roll2x();
+    int rollTwice();
 }

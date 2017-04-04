@@ -36,6 +36,9 @@ abstract class HLayout extends Layout {
     protected static int ROLLX = 100; 
     protected static int ROLLY = 100; 
 
+    protected static int ROLL2XX = 300;
+    protected static int ROLL2XY = ROLLY;
+
     protected static int SKIPX = 450; 
     protected static int SKIPY = ROLLY;
 	

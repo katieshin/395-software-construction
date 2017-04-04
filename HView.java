@@ -35,6 +35,14 @@ class HView extends HLayout implements IHDisplay {
 					l = null;
 			    }
 			}); 
+
+		roll2xb.addActionListener
+			(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					sump.setText(sums(l.rollTwice()));
+					l = null;
+				}
+			});
 	}
 
     // ------------------------------------------------------------------
@@ -71,6 +79,7 @@ class HView extends HLayout implements IHDisplay {
     	String actionString;
     	if (action == Turn.Action.SKIP) actionString = "skip";
     	else if (action == Turn.Action.HOLD) actionString = "hold";
+    	else if (action == Turn.Action.ROLLTWICE) actionString = "roll twice";
     	else actionString = "roll";
 
     	System.out.println("Setting action " + actionString + " to be " + (enabled ? "enabled" : "disabled"));
@@ -106,6 +115,7 @@ class HView extends HLayout implements IHDisplay {
     static int skip; 
     static int done; 
     static int roll; 
+    static int roll2x;
 
     static public void createExamples() {
 		v = new HView("test hview");	
@@ -115,6 +125,7 @@ class HView extends HLayout implements IHDisplay {
 		skip = 0; 
 		done = 0; 
 		roll = 0; 
+		roll2x = 0;
 		human = new Thread () {
 			public void run() {
 			    Robot r;
@@ -141,9 +152,7 @@ class HView extends HLayout implements IHDisplay {
     public static void main(String argv[]) {
 
 		IListener ll = 
-		    new IListener() {	    
-			    // int sum = 0; 
-			    
+		    new IListener() {
 			    public void skip() {
 					skip += 1; 
 			    }
@@ -156,18 +165,26 @@ class HView extends HLayout implements IHDisplay {
 					roll += 1; 
 					return roll; 
 			    }
+
+			 	public int rollTwice() {
+			 		roll2x += 1;
+			 		return roll2x;
+			 	}
 			};
 		
 		human.start();
 		
-		test_button(ROLLX,ROLLY,ll);
-		Tester.check(roll == 1,"roll button check"); 
+		test_button(ROLLX, ROLLY, ll);
+		Tester.check(roll == 1, "roll button check");
 
-		test_button(SKIPX,SKIPY,ll); 
-		Tester.check(skip == 1,"skip button check"); 
+		test_button(ROLL2XX, ROLL2XY, ll);
+		Tester.check(roll2x == 1, "roll2x button check");
 
-		test_button(DONEX,DONEY,ll); 
-		Tester.check(done == 1,"done button check"); 
+		test_button(SKIPX, SKIPY, ll); 
+		Tester.check(skip == 1, "skip button check"); 
+
+		test_button(DONEX, DONEY, ll); 
+		Tester.check(done == 1, "done button check"); 
 
 		endtest = true;
     }
@@ -175,6 +192,6 @@ class HView extends HLayout implements IHDisplay {
     private static void test_button(int i, int j, IListener ll) {
 		x = i; 
 		y = j; 
-		v.listen(ll); 
+		v.listen(ll);
     }
 }

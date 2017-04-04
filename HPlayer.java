@@ -45,7 +45,7 @@ class HPlayer extends Player {
 				public void skip() {
 					turn.skip();
 				}
-				public int roll2x() {
+				public int rollTwice() {
 					int r = turn.rollTwice();
 					sum += r;
 					return r;
