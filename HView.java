@@ -38,7 +38,8 @@ class HView extends HLayout implements IHDisplay {
 	}
 
     // ------------------------------------------------------------------
-	private boolean[] actionEnabled = { true, true, true };
+    // TODO: allocate the right number of booleans programmatically
+	private boolean[] actionEnabled = { true, true, true, true };
 
     private IListener l; 
     public void listen(IListener ll) {

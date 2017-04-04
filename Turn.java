@@ -13,7 +13,8 @@ class Turn implements ITurn {
     public static enum Action {
         ROLL,
         SKIP,
-        HOLD
+        HOLD,
+        ROLLTWICE
     }
 
     // ------------------------------------------------------------------
@@ -47,6 +48,15 @@ class Turn implements ITurn {
         actionTaken = Action.HOLD;
 
         player.done = true;
+    }
+
+    public int rollTwice() {
+        okayP();
+        actionTaken = Action.ROLLTWICE;
+
+        int result = d.throw_die() + d.throw_die();
+        player.record(result);
+        return result;
     }
 
     // ------------------------------------------------------------------
