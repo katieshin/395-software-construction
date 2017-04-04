@@ -65,12 +65,12 @@ class HPlayer extends Player {
     static Turn t2;  
     
     public static void createExamples() {
-	if (h1 == null) {
-	    h1 = new HPlayer("test1");    
-	    s1 = new SPlayer(h1);         
-	    t1 = new Turn(s1, new Die()); 
-	    t2 = new Turn(s1, new Die());
-	}
+		if (h1 == null) {
+		    h1 = new HPlayer("test1");    
+		    s1 = new SPlayer(h1);         
+		    t1 = new Turn(s1, new Die()); 
+		    t2 = new Turn(s1, new Die());
+		}
     }
 
     // ------------------------------------------------------------------
