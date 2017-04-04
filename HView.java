@@ -38,13 +38,19 @@ class HView extends HLayout implements IHDisplay {
 	}
 
     // ------------------------------------------------------------------
+	private boolean[] actionEnabled = { true, true, true };
 
     private IListener l; 
     public void listen(IListener ll) {
 		int x=0;
 		l = ll; 
-		// TODO: Only enable legal buttons.
-		setEnabledAll(true);
+
+		for (Turn.Action action : Turn.Action.values()) {
+			if (actionEnabled[action.ordinal()]) {
+				setActionButtonEnabled(action, true);
+			}
+		}
+
 		// wait until one of the buttons has been clicked 
 		while (l != null) {
 		    System.out.print("");
@@ -61,6 +67,17 @@ class HView extends HLayout implements IHDisplay {
     }
 
     public void setActionEnabled(Turn.Action action, boolean enabled) {
+    	String actionString;
+    	if (action == Turn.Action.SKIP) actionString = "skip";
+    	else if (action == Turn.Action.HOLD) actionString = "hold";
+    	else actionString = "roll";
+
+    	System.out.println("Setting action " + actionString + " to be " + (enabled ? "enabled" : "disabled"));
+
+    	actionEnabled[action.ordinal()] = false;
+    }
+
+    private void setActionButtonEnabled(Turn.Action action, boolean enabled) {
     	if (action == Turn.Action.SKIP) {
     		skipb.setEnabled(enabled);
     	} else if (action == Turn.Action.HOLD) {

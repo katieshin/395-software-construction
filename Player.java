@@ -9,6 +9,7 @@ abstract class Player implements IPlayer {
 
     // return name
     public String name() { return this.name; }
+    public int sum() { return this.sum; }
 
     abstract public void inform(String msg); 
 

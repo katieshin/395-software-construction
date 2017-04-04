@@ -32,7 +32,9 @@ class Server implements IServer {
             for(int i = 0; i < how_many; i++) {
                 SPlayer p = (SPlayer)all_players.elementAt(i); 
 
-                if (p.getPlayer() instanceof HPlayer && allPlayersDoneExcept(p)) {
+                System.out.println("Player " + i + " is a " + (p.getPlayer() instanceof HPlayer ? "Human" : "Machine"));
+                System.out.println("Are all other players done? " + allPlayersDoneExcept(p));
+                if ((p.getPlayer() instanceof HPlayer) && allPlayersDoneExcept(p)) {
                     p.inform("All other players are done, so you may no longer skip.");
                     HPlayer hp = (HPlayer)p.getPlayer();
                     hp.setActionEnabled(Turn.Action.SKIP, false);
@@ -41,7 +43,9 @@ class Server implements IServer {
                 Turn playerTurn = new Turn(p, d);
                 lastRound[i] = playerTurn;
                 if (!p.done)
-                    p.turn(playerTurn); 
+                    p.turn(playerTurn);
+
+                System.out.println("Player " + i + " done = " + (p.done ? "true" : "false"));
             }
             isFirstRound = false;
         }
@@ -179,7 +183,8 @@ class Server implements IServer {
             Tester.check(w.charAt(5) == '2',"winner 2");
         }
 
-        // this alters a lot of state; be careful with the tests and their ordering
+        // this alters a lot of state; be careful with the tests and their
+        // ordering
         server.lastRound = new Turn[server.how_many];
         for (int i = 0; i < server.how_many; i++){ 
             SPlayer p = (SPlayer)server.all_players.elementAt(i); 
@@ -190,6 +195,19 @@ class Server implements IServer {
         }
         Tester.check(server.allPlayersSkipped(), "all skip 1");
 
+        // this test also alters a lot of state. We should have some kind of
+        // "reset state" method we call between tests.
+        // TODO: test reset state method.
+        for (int i = 0; i < server.how_many; i++) {
+            SPlayer p = (SPlayer)server.all_players.elementAt(i);
+            p.done = true;
+        }
+        SPlayer p1 = (SPlayer)server.all_players.elementAt(0);
+        Tester.check(server.allPlayersDoneExcept(p1), "all players done 1");
+        p1.done = false;
+        Tester.check(server.allPlayersDoneExcept(p1), "all players done 2");
+        SPlayer p2 = (SPlayer)server.all_players.elementAt(1);
+        Tester.check(!server.allPlayersDoneExcept(p2), "all players done 3");
     }
 
     private static boolean test_turn(Object s) {

@@ -1,10 +1,9 @@
 // Server internal representation of a player 
 
 class SPlayer {
-    protected boolean done = false; 
-	protected boolean skippedLastTurn = false;
+    protected boolean done = false;
     protected int sum = 0; /* <= 21 */
-    private IPlayer player; 
+    private IPlayer player;
 
     SPlayer(IPlayer player) { this.player = player; }
 
@@ -14,6 +13,10 @@ class SPlayer {
     public boolean turn(Turn t) {
     	if (!done) {
 			player.turn(t);
+			if (player.sum() > 21) {
+				// Bust.
+				done = true;
+			}
 		}
 		return done;
     }

@@ -1,6 +1,8 @@
 interface IPlayer {
     // the name of the player
     String name(); 
+    // the player's running total score
+    int sum();
 
     // provide a display area for i/o
     void registerDisplay(IDisplay d);
