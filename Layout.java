@@ -15,8 +15,9 @@ abstract class Layout {
 		frame = new JFrame("player: " + name);
 		pane = new JPanel();
 
-		pane.setLayout(new GridLayout(rows, 3));
+		pane.setLayout(new GridLayout(rows, 4));
 
+		add_label(pane, "(this page intentionally left blank)");
 		msgp = add_label(pane, " space for messages "); 
 		sump = add_label(pane, sums(0)); 
 		add_label(pane, " " + name);

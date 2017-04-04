@@ -45,6 +45,11 @@ class HPlayer extends Player {
 				public void skip() {
 					turn.skip();
 				}
+				public int roll2x() {
+					int r = turn.rollTwice();
+					sum += r;
+					return r;
+				}
 			});
 		// end of interaction 
 

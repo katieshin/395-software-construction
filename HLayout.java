@@ -8,11 +8,13 @@ abstract class HLayout extends Layout {
     JButton rollb = new JButton("roll"); 
     JButton doneb = new JButton("done"); 
     JButton skipb = new JButton("skip"); 
+    JButton roll2xb = new JButton("roll 2x");
 
     HLayout(String name) {
 	super(2,name);
 
 	pane.add(rollb);
+    pane.add(roll2xb);
 	pane.add(skipb);
 	pane.add(doneb); 
 
@@ -24,9 +26,10 @@ abstract class HLayout extends Layout {
 
     // set the enabling of all buttons 
     protected void setEnabledAll(boolean b) {
-	rollb.setEnabled(b);
-	doneb.setEnabled(b);
-	skipb.setEnabled(b);
+    	rollb.setEnabled(b);
+        roll2xb.setEnabled(b);
+    	doneb.setEnabled(b);
+    	skipb.setEnabled(b);
     }
 
     // for testing, coordinates for pixels on the buttons

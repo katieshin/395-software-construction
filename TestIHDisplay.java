@@ -4,16 +4,18 @@ class TestIHDisplay extends TestIDisplay implements IHDisplay {
     TestIHDisplay() { super(); }
 
     public void listen(IListener ll) {
-		int i = (int)Math.floor(3 * Math.random()); 
+		int i = (int)Math.floor(4 * Math.random()); 
 		if (0 == i) 
-		    i = 3; 
-		// now 1 <= i <= 3
+		    i = 4; 
+		// now 1 <= i <= 4
 
 		if (1 == i)
 		    ll.roll();
 		else if (2 == i) 
-		    ll.skip(); 
-		else // (3 == i)
+		    ll.skip();
+		else if (3 == i)
+			ll.roll2x();
+		else // (4 == i)
 		    ll.done(); 
     }
 

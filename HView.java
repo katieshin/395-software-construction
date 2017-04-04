@@ -85,6 +85,8 @@ class HView extends HLayout implements IHDisplay {
     		doneb.setEnabled(enabled);
     	} else if (action == Turn.Action.ROLL) {
     		rollb.setEnabled(enabled);
+    	} else if (action == Turn.Action.ROLLTWICE) {
+    		roll2xb.setEnabled(enabled);
     	}
     }
 
