@@ -2,48 +2,52 @@
 <head></head>
 <body>
 <pre>
-Specification Model of the Game 
+Specification Model of the Game
 -----------------------------------------------------------------------------
 
 // run the game, administrate the players and the die, play all turns
-+-----------------------+        
++-----------------------+
 | Server                |                            // represent the player
-+-----------------------+                          * +-----------------------+ 
-| SPlayer players       | -------------------------> | SPlayer               | 
-+-----------------------+                            +-----------------------+ 
-| void register(Player) |                            | void inform(String)   | 
-| // add a player       |                            | // accept information | 
-| // for new game       |                            | // from server        | 
-|                       |                            |                       | 
-| String play()         |                            | boolean turn(Turn)    | 
-| // run game, construct|                            | // play turn, done?   | 
-| // msg about result   |                            |                       | 
-+-----------------------+                            | void record(int)      | 
-            |                                        | // record result      | 
-            |                                      1 |                       | 
-            |                     +----------------> | void cheat()          | 
-            |                     |                  | // record attempt to  | 
-            |                     | *                | // cheat              | 
++-----------------------+                          * +-----------------------+
+| SPlayer players       | -------------------------> | SPlayer               |
++-----------------------+                            +-----------------------+
+| void register(Player) |                            | void inform(String)   |
+| // add a player       |                            | // accept information |
+| // for new game       |                            | // from server        |
+|                       |                            |                       |
+| String play()         |                            | boolean turn(Turn)    |
+| // run game, construct|                            | // play turn, done?   |
+| // msg about result   |                            |                       |
++-----------------------+                            | void record(int)      |
+            |                                        | // record result      |
+            |                                      1 |                       |
+            |                     +----------------> | void cheat()          |
+            |                     |                  | // record attempt to  |
+            |                     | *                | // cheat              |
             v 1                   v                  +-----------------------+
-                           // one turn for player               |         
+                           // one turn for player               |
       // a single die      +------------------+                 |
       +-------------+ 1    | Turn             |                 |
       | Die         | <--- +------------------+                 |
-      +-------------+      |                  |                 | 
+      +-------------+      |                  |                 |
       |             |      | int roll()       |                 v 1
-      | int roll()  |      | // roll die      |      // the actual player code 
-      |             |      |                  |      +-----------------------+ 
-      +-------------+      | void skip()      |      | APlayer               | 
-                           | // skip turn     |      +-----------------------+ 
-                           |                  |      | String name           | 
-                           | boolean skipped  |      | void inform(String)   | 
-                           +------------------+      | // accept information |
-                                  ^ 1                | // from server        |
-                                  |                  |                       | 
-                                  |               *  | boolean turn(Turn)    | 
-                                  +----------------> | // play turn, done?   | 
-                                                     |                       | 
-                                                     +-----------------------+ 
+      | int roll()  |      | // roll die      |      // the actual player code
+      |             |      |                  |      +-----------------------+
+      +-------------+      | void skip()      |      | APlayer               |
+                           | // skip turn     |      +-----------------------+
+                           |                  |      | String name           |
+                           | int rollTwice()  |      | void inform(String)   |
+                           | // roll die twice|      | // accept information |
+                           |                  |      | // from server        |
+                           | void hold()      |      |                       |
+                           | // keep score    |      | void turn(Turn)       |
+                           +------------------+      | // play turn          |
+                                  ^ 1                |                       |
+                                  |                  |                       |
+                                  |               *  |                       |
+                                  +----------------> |                       |
+                                                     |                       |
+                                                     +-----------------------+
                                                                 /|\
                                                                / | \
                                                                  |
@@ -62,7 +66,7 @@ Specification Model of the Game
                                 ^ 1                                     ^ 1
                                 |                                       |
                                 |                                       |
-                                |                                       | 
+                                |                                       |
                                 v 1                                     v 1
                         // a machine view                       // a human player
                         +------------------+                    +------------------+
