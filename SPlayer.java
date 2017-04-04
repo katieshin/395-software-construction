@@ -13,10 +13,6 @@ class SPlayer {
     public boolean turn(Turn t) {
     	if (!done) {
 			player.turn(t);
-			if (player.sum() > 21) {
-				// Bust.
-				done = true;
-			}
 		}
 		return done;
     }
