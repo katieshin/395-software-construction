@@ -21,6 +21,22 @@ class SPlayer {
 		return done;
     }
 
+    // add in result to sum and make sure it's not over 21 
+    // pre: !done
+    public void record(int /* 1 .. 6 */ result) {
+		if (done)
+			sum = 0; 
+		else
+			sum += result; 
+
+		if (21 == sum) 
+			done = true; 
+		else if (21 < sum) {
+			done = true; 
+			sum = 0;
+		};
+    }
+
     // record the player's attempt to cheat 
     public void cheat() {
 		done = true; 
@@ -54,22 +70,6 @@ class SPlayer {
 
     // ------------------------------------------------------------------
     // Test
-
-    // add in result to sum and make sure it's not over 21 
-    // pre: !done
-    public void record(int /* 1 .. 6 */ result) {
-		if (done)
-			sum = 0; 
-		else
-			sum += result; 
-
-		if (21 == sum) 
-			done = true; 
-		else if (21 < sum) {
-			done = true; 
-			sum = 0;
-		};
-    }
 
     public static void main(String argv[]) {
 		createExamples();
